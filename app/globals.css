@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body { background: #050505; color: #f2f2f5; }
+body { font-family: 'Schibsted Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.num { font-variant-numeric: tabular-nums; }
+.pixel { font-family: 'Silkscreen', monospace; letter-spacing: 0.02em; }
+img.px { image-rendering: pixelated; }
+:focus-visible { outline: 2px solid #ffd24d; outline-offset: 2px; }
+
+/* subtle CRT scanlines on the high score cabinet only */
+.cabinet { position: relative; background: #08080a; }
+.cabinet::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+}
+@keyframes blink { 50% { opacity: 0; } }
+.blink { animation: blink 1.1s steps(1) infinite; }
+@keyframes flash { from { background: rgba(255,216,77,0.18); } to { background: transparent; } }
+.flash { animation: flash 1.2s ease-out; }
+@media (prefers-reduced-motion: reduce) { .blink, .flash { animation: none; } }
+
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed; }
+.btn-pop { @apply btn bg-pop text-white hover:bg-[#ad6bff]; }
+.btn-mint { @apply btn bg-mint text-ink hover:bg-[#4ff7b5]; }
+.btn-bleed { @apply btn bg-bleed text-white hover:bg-[#ff6f86]; }
+.btn-ghost { @apply btn border border-line text-[#f2f2f5] hover:bg-panel; }
+.input { @apply w-full rounded-md border border-line bg-ink px-3 py-2 outline-none focus:border-pop; }
+.card { @apply rounded-lg border border-line bg-panel; }
+
+/* wallet adapter button restyle */
+.wallet-adapter-button { font-family: 'Schibsted Grotesk', sans-serif !important; height: 38px !important; border-radius: 6px !important; font-size: 14px !important; }
+.wallet-adapter-button-trigger { background: linear-gradient(90deg,#9945ff,#7a5cff) !important; color: #fff !important; }
+
+/* ticker tape */
+@keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-track { animation: tape 60s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* cabinet boot: the one orchestrated moment on the home page */
+@keyframes boot { 0% { opacity: 0; transform: scaleY(0.02); filter: brightness(3); } 40% { opacity: 1; transform: scaleY(0.02); } 70% { transform: scaleY(1); filter: brightness(1.6); } 100% { transform: scaleY(1); filter: none; } }
+.boot { animation: boot 0.9s cubic-bezier(.2,.8,.2,1) both; transform-origin: center; }
+@keyframes rowin { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+.rowin { animation: rowin .25s steps(3) both; }
+@media (prefers-reduced-motion: reduce) { .boot, .rowin { animation: none; } }
+
+/* price flash on terminal cards */
+@keyframes up { from { color: #14f195; } } @keyframes dn { from { color: #ff4d6a; } }
+.tick-up { animation: up 1s ease-out; } .tick-dn { animation: dn 1s ease-out; }
+
+.kbd { @apply rounded border border-line bg-ink px-1.5 py-0.5 font-sans text-[10px] text-mute; }
+
+/* Solana gradient, used sparingly: logo, cabinet frame, progress bars */
+.sol-text { background: linear-gradient(90deg, #9945ff, #14f195); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sol-bar { background: linear-gradient(90deg, #9945ff, #14f195); }
+.sol-frame { border: 2px solid transparent; background: linear-gradient(#08080a, #08080a) padding-box, linear-gradient(135deg, #9945ff, #14f195) border-box; }
+body { background-image: radial-gradient(1200px 500px at 85% -10%, rgba(153,69,255,.10), transparent 60%), radial-gradient(900px 400px at -10% 10%, rgba(20,241,149,.05), transparent 60%); background-attachment: fixed; }
