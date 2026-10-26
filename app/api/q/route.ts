@@ -5,10 +5,10 @@ import { createClient } from "@supabase/supabase-js";
 export const dynamic = "force-dynamic";
 
 const TTL: Record<string, number> = {
-  coins: 2, coin_trades: 2, coin_ticks: 2, coin_candles: 3, trade_feed: 3, trades: 3, positions: 4,
-  leaderboard: 5, daily_stats: 10, equity_snapshots: 10, profile_stats: 15, profiles: 15, league_results: 60, league_entries: 5,
+  coins: 3, coin_trades: 5, coin_ticks: 10, coin_candles: 10, trade_feed: 4, trades: 5, positions: 5,
+  leaderboard: 8, daily_stats: 15, equity_snapshots: 15, profile_stats: 20, profiles: 20, league_results: 60, league_entries: 8,
 };
-const SWR = 20;
+const SWR = 30;
 
 type Spec = { t: string; s?: string; c?: "exact"; h?: 1; f?: [string, string, any][]; o?: [string, boolean][]; l?: number; m?: "maybe" | "single" };
 

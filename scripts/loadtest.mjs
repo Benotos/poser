@@ -2,7 +2,7 @@
 // args: base url, concurrent fake visitors, seconds. Each visitor polls the same cached routes a real browser does.
 const [base = "http://localhost:3000", users = "200", secs = "60"] = process.argv.slice(2);
 const enc = (o) => Buffer.from(JSON.stringify(o)).toString("base64url");
-const snap = () => new Date(Math.floor((Date.now() - 30 * 60_000) / 5000) * 5000).toISOString();
+const snap = () => new Date(Math.floor((Date.now() - 30 * 60_000) / 10000) * 10000).toISOString();
 const routes = () => [
   "/api/q?p=" + enc({ t: "coins", s: "mint,name,symbol,image,created_at,mc_sol,progress,complete", f: [["not", "name", ["is", null]]], o: [], l: 50 }),
   "/api/q?p=" + enc({ t: "coins", s: "*", f: [["not", "name", ["is", null]], ["eq", "complete", false], ["gte", "created_at", snap()]], o: [["created_at", false]], l: 60 }),

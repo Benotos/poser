@@ -11,10 +11,10 @@ type Spec = {
 type Result = { data: any; error: any; count: number | null };
 
 // timestamps like "now minus 15 minutes" change every ms and would make every URL unique.
-// Snap ISO strings to 5s so identical queries share one cache entry.
+// Snap ISO strings to 10s so identical queries share one cache entry.
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
 function snap(v: any): any {
-  if (typeof v === "string" && ISO.test(v)) { const ms = Date.parse(v); if (!isNaN(ms)) return new Date(Math.floor(ms / 5000) * 5000).toISOString(); }
+  if (typeof v === "string" && ISO.test(v)) { const ms = Date.parse(v); if (!isNaN(ms)) return new Date(Math.floor(ms / 10000) * 10000).toISOString(); }
   if (Array.isArray(v)) return v.map(snap);
   return v;
 }
